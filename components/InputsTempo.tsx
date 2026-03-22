@@ -1,0 +1,116 @@
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  ImageBackground,
+} from 'react-native';
+import { imagens } from '../components/Imagens';
+
+interface InputsTempoProps {
+  intervalo: string;
+  setIntervalo: (intervalo: string) => void;
+  tempoExibicao: string;
+  setTempoExibicao: (tempo: string) => void;
+}
+
+export default function InputsTempo({
+  intervalo,
+  setIntervalo,
+  tempoExibicao,
+  setTempoExibicao,
+}: InputsTempoProps) {
+  return (
+    <View style={styles.container}>
+      {/* TEMPO */}
+      <View style={styles.viwInput}>
+        <Text style={styles.txtDescricaoInput}>Tempo de execução:</Text>
+
+        <ImageBackground
+          source={imagens.input}
+          style={styles.bgInput}
+          imageStyle={styles.imageStyle}
+        >
+          <TextInput
+            style={styles.textInput}
+            keyboardType="numeric"
+            value={tempoExibicao}
+            placeholder="0"
+            placeholderTextColor="#999"
+            onFocus={() => {
+              if (tempoExibicao === '0') setTempoExibicao('');
+            }}
+            onBlur={() => {
+              if (tempoExibicao === '') setTempoExibicao('0');
+            }}
+            onChangeText={setTempoExibicao}
+          />
+        </ImageBackground>
+      </View>
+
+      {/* INTERVALO */}
+      <View style={styles.viwInput}>
+        <Text style={styles.txtDescricaoInput}>Intervalo (segundos):</Text>
+
+        <ImageBackground
+          source={imagens.input}
+          style={styles.bgInput}
+          imageStyle={styles.imageStyle}
+        >
+          <TextInput
+            style={styles.textInput}
+            keyboardType="numeric"
+            value={intervalo}
+            placeholder="0"
+            placeholderTextColor="#999"
+            onFocus={() => {
+              if (intervalo === '0') setIntervalo('');
+            }}
+            onBlur={() => {
+              if (intervalo === '') setIntervalo('0');
+            }}
+            onChangeText={setIntervalo}
+          />
+        </ImageBackground>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 8,
+  },
+
+  viwInput: {
+    width: '48%',
+    paddingLeft: 5,
+  },
+
+  txtDescricaoInput: {
+    color: '#200701',
+    fontFamily: 'Nunito-VariableFont_wght',
+    fontWeight: 'bold',
+    paddingVertical: 6,
+    paddingLeft: 3,
+  },
+
+  bgInput: {
+    width: '98%',
+    height: 35,
+    justifyContent: 'center',
+  },
+
+  imageStyle: {
+    borderRadius: 2,
+  },
+
+  textInput: {
+    height: '100%',
+    paddingHorizontal: 12,
+    color: '#000',
+    backgroundColor: 'transparent',
+  },
+});
