@@ -4,6 +4,18 @@
     {
       "path": "assets/fonts/Creepster-Regular.ttf",
       "sha1": "7d00ea50354f1d3364e6403054254586fbafc533"
+    },
+    {
+      "path": "assets/fonts/Nosifer-Regular.ttf",
+      "sha1": "7badc7e21ad178bb9b4429f0a183697d4f76f447"
+    },
+    {
+      "path": "assets/fonts/Nunito-Italic-VariableFont_wght.ttf",
+      "sha1": "d42560cf14a98cf5e44dbcb68574057e36b1652c"
+    },
+    {
+      "path": "assets/fonts/Nunito-VariableFont_wght.ttf",
+      "sha1": "21dd5ae8c31a1825d210234af3b0c04a882de724"
     }
   ]
 }

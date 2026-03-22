@@ -5,13 +5,14 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
-import { imagens } from '../components/Imagens';
+import { imagens } from '../../Imagens';
 
 interface InputsTempoProps {
   intervalo: string;
   setIntervalo: (intervalo: string) => void;
   tempoExibicao: string;
   setTempoExibicao: (tempo: string) => void;
+  modoRede: boolean;
 }
 
 export default function InputsTempo({
@@ -19,6 +20,7 @@ export default function InputsTempo({
   setIntervalo,
   tempoExibicao,
   setTempoExibicao,
+  modoRede,
 }: InputsTempoProps) {
   return (
     <View style={styles.container}>
@@ -57,8 +59,11 @@ export default function InputsTempo({
           style={styles.bgInput}
           imageStyle={styles.imageStyle}
         >
+          {!modoRede && <View style={styles.overlay} />}
+
           <TextInput
-            style={styles.textInput}
+            editable={modoRede}
+            style={[styles.textInput, !modoRede && styles.condicaoCorModoRede]}
             keyboardType="numeric"
             value={intervalo}
             placeholder="0"
@@ -112,5 +117,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     color: '#000',
     backgroundColor: 'transparent',
+    paddingLeft: 10,
+    marginTop: 3,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(133, 132, 132, 0.5)',
+    width: 176, // 👈 escurece
+    height: 30,
+    marginLeft: 5,
+    marginTop: 3,
+  },
+  condicaoCorModoRede: {
+    color: '#646464',
   },
 });

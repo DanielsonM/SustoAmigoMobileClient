@@ -5,8 +5,7 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
-import { imagens } from '../components/Imagens';
-import { useState } from 'react';
+import { imagens } from '../../Imagens';
 
 interface InputsRedeProps {
   ip: string;

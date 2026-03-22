@@ -57,6 +57,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Creepster-Regular.ttf</string>
+		<string>Nosifer-Regular.ttf</string>
+		<string>Nunito-Italic-VariableFont_wght.ttf</string>
+		<string>Nunito-VariableFont_wght.ttf</string>
 	</array>
 </dict>
 </plist>
