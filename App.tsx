@@ -1,6 +1,6 @@
 import { StyleSheet, Text, ImageBackground } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Switches from './components/Switches';
 import InputsRede from './components/Inputs/InputsRede';
 import InputsTempo from './components/Inputs/InputsTempo';
@@ -10,7 +10,6 @@ import BotaoEnviarSom from './components/Botoes/BotaoEnviarSom';
 import BotaoEnviarImagem from './components/Botoes/BotaoEnviarImagem';
 import BotaoEnviarSusto from './components/Botoes/BotaoEnviarSusto';
 import Spider from './components/spider/Spider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function App() {
   const [modo, setModo] = useState<'rede' | 'automatico' | null>('rede');

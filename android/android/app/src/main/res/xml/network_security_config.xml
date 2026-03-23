@@ -1,0 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+     2 <network-security-config>
+     3     <base-config cleartextTrafficPermitted="true">
+     4         <trust-anchors>
+     5             <certificates src="system" />
+     6         </trust-anchors>
+     7     </base-config>
+     8 </network-security-config>

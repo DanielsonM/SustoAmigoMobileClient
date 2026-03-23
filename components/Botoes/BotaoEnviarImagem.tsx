@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { imagens } from '../../Imagens';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -16,6 +17,11 @@ interface BotoesProps {
 export default function BotaoEnviarImagem({ ip, porta }: BotoesProps) {
   const enviarImage = async () => {
     try {
+      if (!validarIp(ip) || !validarPorta(porta)) {
+        Alert.alert('Erro', 'IP ou porta inválidos');
+        return;
+      }
+
       const result = await launchImageLibrary({
         mediaType: 'photo',
       });
@@ -37,7 +43,7 @@ export default function BotaoEnviarImagem({ ip, porta }: BotoesProps) {
         name: file.fileName || `upload.${file.type?.split('/')[1]}`,
       } as any);
 
-      await fetch(`http://${ip}:${porta}/upload/${'photo'}`, {
+      await fetchComTimeout(`http://${ip}:${porta}/upload/${'photo'}`, {
         method: 'POST',
         body: formData,
       });

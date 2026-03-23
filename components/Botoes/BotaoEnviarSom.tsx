@@ -9,6 +9,7 @@ import { imagens } from '../../Imagens';
 import { launchImageLibrary } from 'react-native-image-picker';
 import TelaMensagem from '../../modulos/Mensagem/TelaMensagem';
 import React, { useState } from 'react';
+import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -21,6 +22,12 @@ export default function BotaoEnviarSom({ ip, porta }: BotoesProps) {
 
   const enviarSom = async () => {
     try {
+      if (!validarIp(ip) || !validarPorta(porta)) {
+        setMensagem('IP ou porta inválidos');
+        setMensagemVisivel(true);
+        return;
+      }
+
       const result = await launchImageLibrary({
         mediaType: 'mixed',
       });
@@ -43,7 +50,7 @@ export default function BotaoEnviarSom({ ip, porta }: BotoesProps) {
         name: file.fileName || `upload.${file.type?.split('/')[1]}`,
       } as any);
 
-      await fetch(`http://${ip}:${porta}/upload/audio`, {
+      await fetchComTimeout(`http://${ip}:${porta}/upload/audio`, {
         method: 'POST',
         body: formData,
       });

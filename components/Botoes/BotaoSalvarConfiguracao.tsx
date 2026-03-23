@@ -9,7 +9,8 @@ import { imagens } from '../../Imagens';
 import {
   salvarConfig,
   ConfigProps,
-} from '../../modulos/SalvarCarregarDadosLocais'; // importa suas funções
+} from '../../modulos/SalvarCarregarDadosLocais';
+import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -28,8 +29,13 @@ export default function BotaoSalvarConfiguracao({
 }: BotoesProps) {
   const salvarConfigServidorELocal = async () => {
     try {
+      if (!validarIp(ip) || !validarPorta(porta)) {
+        Alert.alert('Erro', 'IP ou porta inválidos');
+        return;
+      }
+
       // 1. Salvar no servidor
-      await fetch(`http://${ip}:${porta}/config`, {
+      await fetchComTimeout(`http://${ip}:${porta}/config`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,7 +55,7 @@ export default function BotaoSalvarConfiguracao({
         porta,
         intervalo,
         tempoExibicao,
-        modo: modo ? 'rede' : 'automatico', // ajusta para o tipo correto
+        modo: modo ? 'rede' : 'automatico',
       };
       await salvarConfig(configLocal);
 

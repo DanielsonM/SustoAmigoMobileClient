@@ -6,7 +6,7 @@ import {
   Alert,
 } from 'react-native';
 import { imagens } from '../../Imagens';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -16,12 +16,18 @@ interface BotoesProps {
 export default function BotaoEnviarSusto({ ip, porta }: BotoesProps) {
   const enviarSusto = async () => {
     try {
-      await fetch(`http://${ip}:${porta}/comando`, {
+      if (!validarIp(ip) || !validarPorta(porta)) {
+        Alert.alert('Erro', 'IP ou porta inválidos');
+        return;
+      }
+
+      await fetchComTimeout(`http://${ip}:${porta}/comando`, {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ acao: 'SUSTO' }),
       });
 
-      Alert.alert('Susto enviado');
+      Alert.alert('Susto enviado!');
     } catch (err: any) {
       Alert.alert('Erro', err.message);
     }
