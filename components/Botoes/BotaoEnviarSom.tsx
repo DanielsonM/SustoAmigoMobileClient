@@ -3,13 +3,16 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
-  Alert,
 } from 'react-native';
 import { imagens } from '../../Imagens';
-import { launchImageLibrary } from 'react-native-image-picker';
 import TelaMensagem from '../../modulos/Mensagem/TelaMensagem';
 import React, { useState } from 'react';
-import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
+import {
+  validarIp,
+  validarPorta,
+  fetchComTimeout,
+} from '../../utils/validacoes';
+import { pick, types } from '@react-native-documents/picker';
 
 interface BotoesProps {
   ip: string;
@@ -28,14 +31,16 @@ export default function BotaoEnviarSom({ ip, porta }: BotoesProps) {
         return;
       }
 
-      const result = await launchImageLibrary({
-        mediaType: 'mixed',
+      // Abrir seletor de arquivos de áudio
+      const result = await pick({
+        type: [types.audio],
       });
 
-      if (!result.assets) return;
+      // Se o usuário cancelou ou não selecionou nada
+      if (!result || result.length === 0) return;
 
-      const file = result.assets[0];
-      const tiposPermitidos = ['audio/wav', 'audio/mp3'];
+      const file = result[0];
+      const tiposPermitidos = ['audio/wav', 'audio/mpeg', 'audio/mp3'];
 
       if (!file.type || !tiposPermitidos.includes(file.type)) {
         setMensagem('Selecione apenas mp3 ou wav');
@@ -47,7 +52,7 @@ export default function BotaoEnviarSom({ ip, porta }: BotoesProps) {
       formData.append('file', {
         uri: file.uri,
         type: file.type,
-        name: file.fileName || `upload.${file.type?.split('/')[1]}`,
+        name: file.name || `upload.${file.type?.split('/')[1]}`,
       } as any);
 
       await fetchComTimeout(`http://${ip}:${porta}/upload/audio`, {
@@ -58,6 +63,7 @@ export default function BotaoEnviarSom({ ip, porta }: BotoesProps) {
       setMensagem('Áudio enviado com sucesso!');
       setMensagemVisivel(true);
     } catch (err: any) {
+      // Se houve erro inesperado
       setMensagem(`Erro: ${err.message}`);
       setMensagemVisivel(true);
     }
@@ -92,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     width: '75%',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 8,
   },
   bgButton: {
     width: '100%',

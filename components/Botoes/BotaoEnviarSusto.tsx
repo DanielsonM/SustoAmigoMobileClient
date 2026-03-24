@@ -6,7 +6,11 @@ import {
   Alert,
 } from 'react-native';
 import { imagens } from '../../Imagens';
-import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
+import {
+  validarIp,
+  validarPorta,
+  fetchComTimeout,
+} from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     width: '74%',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 8,
   },
   bgButton: {
     width: '100%',

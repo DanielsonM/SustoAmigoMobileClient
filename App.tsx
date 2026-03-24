@@ -1,7 +1,7 @@
 import { StyleSheet, Text, ImageBackground } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
-import Switches from './components/Switches';
+import SwitchsModo from './components/switchs/SwitchsModo.tsx';
 import InputsRede from './components/Inputs/InputsRede';
 import InputsTempo from './components/Inputs/InputsTempo';
 import { imagens } from './Imagens.js';
@@ -10,6 +10,7 @@ import BotaoEnviarSom from './components/Botoes/BotaoEnviarSom';
 import BotaoEnviarImagem from './components/Botoes/BotaoEnviarImagem';
 import BotaoEnviarSusto from './components/Botoes/BotaoEnviarSusto';
 import Spider from './components/spider/Spider';
+import SwitchsTipoEnvio from './components/switchs/SwitchsTipoEnvio.tsx';
 
 function App() {
   const [modo, setModo] = useState<'rede' | 'automatico' | null>('rede');
@@ -17,6 +18,8 @@ function App() {
   const [porta, setPorta] = useState('0000');
   const [intervalo, setIntervalo] = useState('0');
   const [tempoExibicao, setTempoExibicao] = useState('0');
+  const [booApenasSom, setApenasSom] = useState(false);
+  const [booApenasImagem, setApenasImagem] = useState(false);
 
   return (
     <SafeAreaProvider>
@@ -28,7 +31,7 @@ function App() {
         >
           <Spider />
           <Text style={styles.title}>Susto Amigo</Text>
-          <Switches modo={modo} setModo={setModo} />
+          <SwitchsModo modo={modo} setModo={setModo} />
           <InputsRede ip={ip} setIp={setIp} porta={porta} setPorta={setPorta} />
           <InputsTempo
             intervalo={intervalo}
@@ -47,6 +50,12 @@ function App() {
           <BotaoEnviarImagem ip={ip} porta={porta} />
           <BotaoEnviarSom ip={ip} porta={porta} />
           <BotaoEnviarSusto ip={ip} porta={porta} />
+          <SwitchsTipoEnvio
+            booApenasSom={booApenasSom}
+            setApenasSom={setApenasSom}
+            booApenasImagem={booApenasImagem}
+            setApenasImagem={setApenasImagem}
+          />
         </ImageBackground>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -56,6 +65,7 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   background: {
     flex: 1,
@@ -64,7 +74,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    marginTop: 20,
+    marginTop: 10,
     fontFamily: 'Creepster-Regular',
     fontWeight: 'semibold',
     color: '#910000',

@@ -18,13 +18,10 @@ export const validarPorta = (porta: string): boolean => {
   return !isNaN(num) && num >= 1 && num <= 65535;
 };
 
-/**
- * Faz uma requisição fetch com timeout
- */
 export const fetchComTimeout = async (
   url: string,
   options?: RequestInit,
-  timeoutMs: number = 5000
+  timeoutMs: number = 5000,
 ): Promise<Response> => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);

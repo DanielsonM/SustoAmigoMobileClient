@@ -6,7 +6,7 @@ interface SwitchesProps {
   setModo: (modo: 'rede' | 'automatico' | null) => void;
 }
 
-export default function Switches({ modo, setModo }: SwitchesProps) {
+export default function SwitchsModo({ modo, setModo }: SwitchesProps) {
   const [isEnabled, setIsEnabled] = useState(false);
   return (
     <View style={styles.viwSwitch}>

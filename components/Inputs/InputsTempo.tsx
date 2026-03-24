@@ -123,9 +123,9 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(133, 132, 132, 0.5)',
-    width: 176, // 👈 escurece
+    width: 176,
     height: 30,
-    marginLeft: 5,
+    marginLeft: -1,
     marginTop: 3,
   },
   condicaoCorModoRede: {
