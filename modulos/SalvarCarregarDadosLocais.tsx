@@ -7,6 +7,8 @@ export interface ConfigProps {
   intervalo: string;
   tempoExibicao: string;
   modo: 'rede' | 'automatico' | null;
+  ApenasSom: boolean;
+  ApenasImagem: boolean;
 }
 
 // Função para salvar

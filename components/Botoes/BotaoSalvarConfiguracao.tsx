@@ -10,7 +10,11 @@ import {
   salvarConfig,
   ConfigProps,
 } from '../../modulos/SalvarCarregarDadosLocais';
-import { validarIp, validarPorta, fetchComTimeout } from '../../utils/validacoes';
+import {
+  validarIp,
+  validarPorta,
+  fetchComTimeout,
+} from '../../utils/validacoes';
 
 interface BotoesProps {
   ip: string;
@@ -18,6 +22,8 @@ interface BotoesProps {
   intervalo: string;
   tempoExibicao: string;
   modo: boolean;
+  ApenasSom: boolean;
+  ApenasImagem: boolean;
 }
 
 export default function BotaoSalvarConfiguracao({
@@ -26,6 +32,8 @@ export default function BotaoSalvarConfiguracao({
   intervalo,
   tempoExibicao,
   modo,
+  ApenasSom,
+  ApenasImagem,
 }: BotoesProps) {
   const salvarConfigServidorELocal = async () => {
     try {
@@ -44,6 +52,8 @@ export default function BotaoSalvarConfiguracao({
           ModoRede: modo,
           Porta: parseInt(porta),
           IpServidor: ip,
+          ApenasSom: ApenasSom,
+          ApenasImagem: ApenasImagem,
           ImagemSelecionada: 'foto.jpg',
           SomSelecionado: 'grito.mp3',
         }),
@@ -56,6 +66,8 @@ export default function BotaoSalvarConfiguracao({
         intervalo,
         tempoExibicao,
         modo: modo ? 'rede' : 'automatico',
+        ApenasSom,
+        ApenasImagem,
       };
       await salvarConfig(configLocal);
 

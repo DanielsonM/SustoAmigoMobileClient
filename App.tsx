@@ -46,6 +46,8 @@ function App() {
             intervalo={intervalo}
             tempoExibicao={tempoExibicao}
             modo={modo === 'rede' ? true : false}
+            ApenasSom={booApenasSom}
+            ApenasImagem={booApenasImagem}
           />
           <BotaoEnviarImagem ip={ip} porta={porta} />
           <BotaoEnviarSom ip={ip} porta={porta} />
